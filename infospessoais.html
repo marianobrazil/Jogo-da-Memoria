@@ -14,7 +14,7 @@
 	        <p>Informações Pessoais</p>
             <form>
                 <input type="text" class="form" required placeholder="Nome completo">
-                <input type="date" class="form" required placeholder="Data de nascimento">
+                <input type="text" class="form" onfocus="(this.type='date')" id="date" required placeholder="Data de nascimento">
                 <input type="text" name="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" class="form" required placeholder="CPF:  XXX.XXX.XXX-XX">
                 <input type="tel" class="form" required placeholder="Telefone: (XX) XXXXX-XXXX">
                 <input type="email" class="form" required placeholder="E-mail: seuemail@dominio.com">
