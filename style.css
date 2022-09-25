@@ -57,6 +57,21 @@ a
     text-align: center;
 }
 
+.inalteravel
+{
+    color: black;
+    background-color: #777777;
+    display: block;
+    width: 25%;
+    position: relative;
+    height: 2em;
+    margin: auto;
+    line-height: 200%;
+    margin-top: 1em;
+    padding: 0.5% 3%;
+    border-radius: 25px;
+}
+
 ::placeholder {
     text-align: center;
 }
