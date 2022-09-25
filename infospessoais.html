@@ -1,8 +1,8 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="pt">
     <head>
-        <title>BigBrain</title>
+        <title>BigBrain - Informações Pessoais</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
@@ -11,16 +11,18 @@
             <img id="biglogo" src="src/brain.png" alt="BigBrain Logo">
             <h2>BigBrain</h2>
             <p style="margin-top: 0em;">Jogo da Memória</p>
-	    <p>Informações Pessoais</p>
-	    <p class = "form">Nome completo</p>
-	    <p class = "inalteravel">Data de nascimento</p>
-	    <p class = "inalteravel">CPF</p>
-	    <p class = "form">Telefone</p>
-	    <p class = "form">E-mail</p>
-	    <p class = "inalteravel">Usuário</p>
-	    <p class = "form">Senha</p>
-	    <p class = "form">Confirme sua senha</p>
-	    <h2 class = "botao">Salvar</h2>
+	        <p>Informações Pessoais</p>
+            <form>
+                <input type="text" class="form" required placeholder="Nome completo">
+                <input type="date" class="form" required placeholder="Data de nascimento">
+                <input type="text" class="form" required placeholder="CPF">
+                <input type="tel" class="form" required placeholder="Telefone">
+                <input type="email" class="form" required placeholder="E-mail">
+                <input type="text" class="form" required placeholder="Usuário">
+                <input type="password" class="form" required placeholder="Senha">
+                <input type="password" class="form" required placeholder="Confirmar senha">
+                <input type="submit" value="Salvar" class="botao">
+            </form>
         </main>
     </body>    
 </html>
