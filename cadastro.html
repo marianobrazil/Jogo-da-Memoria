@@ -1,8 +1,8 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="pt">
     <head>
-        <title>BigBrain</title>
+        <title>BigBrain - Cadastro</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
@@ -11,15 +11,19 @@
             <img id="biglogo" src="src/brain.png" alt="BigBrain Logo">
             <h2>BigBrain</h2>
             <p style="margin-top: 0em;">Jogo da Memória</p>
-	    <p class = "form">Nome completo</p>
-	    <p class = "form">Data de nascimento</p>
-	    <p class = "form">CPF</p>
-	    <p class = "form">Telefone</p>
-	    <p class = "form">E-mail</p>
-	    <p class = "form">Usuário</p>
-	    <p class = "form">Senha</p>
-	    <p class = "form">Confirme sua senha</p>
-	    <h3 class = "botao">Cadastrar</h3>
+
+            <form>
+                <input type="text" class="form" required placeholder="Nome completo">
+                <input type="date" class="form" required placeholder="Data de nascimento">
+                <input type="text" name="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" class="form" required placeholder="CPF">
+                <input type="text" class="form" required placeholder="Telefone">
+                <input type="text" class="form" required placeholder="E-mail">
+                <input type="text" class="form" required placeholder="Usúario">
+                <input type="password" class="form" required placeholder="Senha">
+                <input type="password" class="form" required placeholder="Confirme sua senha">
+                <input type="submit" value="Cadastrar" class="botao">
+            </form>
+
 	    <p>Já possui uma conta? <a href="login.html"> <b>Entre</b></a></p>
         </main>
     </body>    
