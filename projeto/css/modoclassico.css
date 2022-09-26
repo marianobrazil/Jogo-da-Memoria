@@ -1,0 +1,23 @@
+#comp1{
+    margin-left: 7%;
+    margin-right: 22%;
+    font-size: 20px;
+}
+#comp2{
+    margin-right: 8%;
+    font-weight: bold;
+}
+#comp3{
+    margin-right: 4%;
+}
+#comp4{
+    margin-right: 4%;
+}
+section{
+    position: absolute;
+    background-color: brown;
+    margin-top: 8%;
+    margin-left: 18%;
+    width: 60%;
+    height: 75%;
+}
