@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sistema</title>
+</head>
+<body>
+    <ul style="list-style: none">
+        <li><a href="#" id="linkCadastro">Cadastro</a></li>
+        <li><a href="#" id="linkBusca">Busca</a></li>
+    </ul>
+    <div id="htmlConteudo">
+        
+    </div>
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var linkCadastro = document.getElementById('linkCadastro');
+        linkCadastro.onclick = function (){
+            $(function() {
+                $.get('produto/cadastro.html', function (data){
+                $("#htmlConteudo").html(data);
+            });
+            });
+        }
+    </script>
+</body>
+</html>
