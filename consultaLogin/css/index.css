@@ -1,0 +1,28 @@
+.form-group{
+    font-size: 150%;
+    background-color: rgb(83, 83, 83);
+    width: 23%;
+    height: 150px;
+    margin-left: 35%;
+    margin-top: 15%;
+    padding-top: 2.5%;
+    text-align: center;
+    color: white;
+    border-radius: 14%;
+}
+.form-group input{
+    border-radius: 17.5%;
+}
+body{
+    background-image: url('img/fundo.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+h1{
+    color: white;
+    text-align: center;
+    font-size: 500%
+}
+p{
+    color: white;
+}
