@@ -1,6 +1,6 @@
 <?php
     define('HOST','localhost');
-    define('DBNAME','projeto');
+    define('DBNAME','jogomemoria');
     define('USERNAME','root');
     define('PASSWORD','');
     class Conexao

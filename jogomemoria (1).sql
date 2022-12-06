@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 06-Dez-2022 às 22:03
+-- Tempo de geração: 06-Dez-2022 às 22:46
 -- Versão do servidor: 10.4.25-MariaDB
 -- versão do PHP: 8.1.10
 
@@ -18,8 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
-CREATE DATABASE jogomemoria;
-use jogomemoria;
+-- Banco de dados: `jogomemoria`
 --
 
 DELIMITER $$
@@ -27,6 +26,8 @@ DELIMITER $$
 -- Procedimentos
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `cadastrarJogador` (IN `nome` VARCHAR(200), IN `cpf` VARCHAR(11), IN `telefone` VARCHAR(20), IN `email` VARCHAR(50), IN `usuario` VARCHAR(50), IN `senha` VARCHAR(100))   insert into jogador(nome, cpf, telefone, email, usuario, senha) values (nome,cpf,telefone,email,usuario,PASSWORD(senha))$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cadastrarPartida` (IN `codigoJogador` INT(11), IN `modo` INT(2), IN `dimensao` VARCHAR(3), IN `datajogo` DATETIME, IN `resultado` INT(1), IN `tempoJogo` TIME)   insert into partida(partida.codigoJogador,partida.modo,partida.dimensao,partida.datajogo,partida.resultado,partida.tempoJogo) VALUES (codigoJogador,modo,dimensao,datajogo,resultado,tempoJogo)$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarHistoricoJogador` (IN `codigo` INT)   select * from partida where partida.codigoJogador = codigo$$
 
@@ -63,7 +64,7 @@ CREATE TABLE `partida` (
   `dimensao` varchar(3) NOT NULL,
   `datajogo` datetime NOT NULL,
   `resultado` int(1) NOT NULL,
-  `tempoJogo` time null
+  `tempoJogo` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
