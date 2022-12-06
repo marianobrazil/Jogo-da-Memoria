@@ -3,8 +3,8 @@ define('HOST', 'localhost');
 define('USUARIO', 'root');
 define('SENHA','');
 define('DB','revisao');
-$conexao = mysqli_connect (HOST, USUARIO, SENHA, DB) or die ('Não foi possível conectar');
 class Conexao {
+    public $conexao = mysqli_connect (HOST, USUARIO, SENHA, DB);
     public $lastInsertId;
     private function Conectar(){
         return new PDO('mysql:host='.HOST.';dbname='.DB, USUARIO, SENHA);       
@@ -33,7 +33,8 @@ class Conexao {
             $this->lastInsertId = $last_id->fetchAll()[0]['id'];
         }          
         return $result;
-    }    
+    }
+        
 }
 
 
