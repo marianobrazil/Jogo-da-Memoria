@@ -1,26 +1,96 @@
 const grid = document.querySelector('.grid');
 const tabuleiro = localStorage.getItem('tabuleiro');
 const timer = document.getElementById('timerP');
-localStorage.setItem('fimJogo',false);
 let statusVitoria = false;
 
-const redirect = () => {
-    window.location = '../index.php';
-    localStorage.setItem('statusVitoria',false);
-    localStorage.setItem('fimJogo',true);
+let xhttp;
+
+// function enviarDados() {
+//     let nomeUsuario = localStorage.getItem('tabuleiro');
+//     xhttp = new XMLHttpRequest();
+//     if (!xhttp) {
+//         alert('Não foi possível criar um objeto XMLHttpRequest.');
+//         return false;
+//     }
+//     xhttp.onreadystatechange = mostraResposta;
+//     xhttp.open('POST', '../backend/cadastroPartida.php', true);
+//     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+//     xhttp.send('userName=' + encodeURIComponent(nomeUsuario));
+// }
+
+// function mostraResposta() {
+//     try {
+//         if (xhttp.readyState === XMLHttpRequest.DONE) {
+//             if (xhttp.status === 200) {
+//                 let resposta = JSON.parse(xhttp.responseText);
+//                 alert(resposta.stringModificada + ' - Seu username é: ' +
+//                     resposta.userName);
+//             }
+//             else {
+//                 alert('Um problema ocorreu.');
+//             }
+//         }
+//     }
+//     catch (e) {
+//         alert("Ocorreu uma exceção: " + e.description);
+//     }
+// }
+
+function enviarDados() {
+    let tabuleiro = localStorage.getItem('tabuleiro');
+    let dataJogo = localStorage.getItem('dataJogo');
+    let statusVitoria = localStorage.getItem('statusVitoria');
+    let tempoUsado = localStorage.getItem('tempoUsado');
+    xhttp = new XMLHttpRequest();
+    if (!xhttp) {
+        alert('Não foi possível criar um objeto XMLHttpRequest.');
+        return false;
+    }
+    xhttp.onreadystatechange = mostraResposta;
+    xhttp.open('POST', '../backend/cadastroPartida.php', true);
+    xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhttp.send('tabuleiro=' + encodeURIComponent(tabuleiro)+'&dataJogo=' + encodeURIComponent(dataJogo)+'&statusVitoria=' + encodeURIComponent(statusVitoria)
+    +'&tempoUsado=' + encodeURIComponent(tempoUsado)+'&modo='+1);
 }
+
+function mostraResposta() {
+    try {
+        if (xhttp.readyState === XMLHttpRequest.DONE) {
+            if (xhttp.status === 200) {
+                let resposta = JSON.parse(xhttp.responseText);
+                alert(resposta.stringModificada);
+            }
+            else {
+                alert('Um problema ocorreu.');
+            }
+        }
+    }
+    catch (e) {
+        alert("Ocorreu uma exceção: " + e.description);
+    }
+}
+
+const redirect = () => {
+    localStorage.setItem('statusVitoria',0);
+    localStorage.setItem('tempoUsado','00:00:00');
+    enviarDados();
+    window.location = '../index.php';
+    localStorage.setItem('statusVitoria', 0);
+}
+
+
 
 //definindo o tempo para os jogos dependendo do tamanho do tabuleiro
 const i = parseInt(tabuleiro[0]);
 grid.style.gridTemplateColumns = `repeat(${i}, 1fr)`;
 let minutosIniciais = 0;
-if(i == 2){
+if (i == 2) {
     minutosIniciais = 0.08;
-}else if(i == 4){
+} else if (i == 4) {
     minutosIniciais = 1;
-}else if(i == 6){
+} else if (i == 6) {
     minutosIniciais = 2;
-}else{
+} else {
     minutosIniciais = 3;
 }
 var tempo = minutosIniciais * 60;
@@ -29,36 +99,37 @@ var tempoAtual;
 
 //função para atualizar o cronômetro
 const atualizarTempo = () => {
-    if(!statusVitoria){
+    if (!statusVitoria) {
         const minutes = Math.floor(tempo / 60);
         let segundos = Math.ceil(tempo % 60);
-    
-        if(segundos < 10){
+
+        if (segundos < 10) {
             segundos = '0' + segundos;
         }
-        else{
+        else {
             segundos = segundos;
         }
-        if(tempo > 0){
+        if (tempo > 0) {
             timer.innerHTML = `${minutes}:${segundos}`;
             tempoAtual = minutes * 60 + parseInt(segundos);
             tempo--;
         }
-        else if(fimTempo == false && statusVitoria!=true){
+        else if (fimTempo == false && statusVitoria != true) {
             fimTempo = true;
             timer.innerHTML = `00:00`;
             setTimeout(() => {
                 alert('Você perdeu!');
                 clearInterval(atualizarTempo());
-                localStorage.setItem('statusVitoria',false);
-                localStorage.setItem('fimJogo',true);
+                localStorage.setItem('statusVitoria', 0);
+                localStorage.setItem('tempoUsado','00:00:00');
+                enviarDados();
 
             }, 200);
             const card = document.querySelectorAll('.card');
             card.forEach(carta => {
                 carta.style.cursor = 'not-allowed';
                 carta.removeEventListener('click', flipCard);
-                
+
             });
         }
     }
@@ -106,20 +177,18 @@ const checkMatch = (carta1, carta2) => {
             carta1.firstChild.classList.add('card-match');
             carta2.firstChild.classList.add('card-match');
             const todasDiv = document.querySelectorAll('.card-match');
-            if(todasDiv.length == i*i){
+            if (todasDiv.length == i * i) {
                 alert('Parabéns, você ganhou!');
                 statusVitoria = true;
-                localStorage.setItem('statusVitoria',true);
+                localStorage.setItem('statusVitoria', 1);
                 let tempoUsado = minutosIniciais * 60 - tempoAtual;
                 tempoUsado = tempoUsado <= 0 ? tempoUsado = 0 : tempoUsado = tempoUsado;
                 let minutes2 = Math.floor(tempoUsado / 60);
                 let segundos2 = Math.ceil(tempoUsado % 60);
                 segundos2 = segundos2 < 10 ? segundos2 = '0' + segundos2 : segundos2 = segundos2;
                 minutes2 = minutes2 < 10 ? minutes2 = '0' + minutes2 : minutes2 = minutes2;
-
-                localStorage.setItem('tempoUsado',`00:${minutes2}:${segundos2}`);
-                localStorage.setItem('fimJogo',true);
-
+                localStorage.setItem('tempoUsado', `00:${minutes2}:${segundos2}`);
+                enviarDados();
                 clearInterval(atualizarTempo());
             }
         }
@@ -165,7 +234,7 @@ const createCard = (imagem) => {
     card.appendChild(front);
     card.appendChild(back);
 
-    
+
     card.addEventListener('click', flipCard);
     return card;
 }
@@ -224,20 +293,20 @@ let trapaca = false;
 const btnTrapaca = document.querySelector('.trapaca');
 const ativarTrapaca = () => {
     const faceBack = document.querySelectorAll('.back');
-    if(trapaca){
+    if (trapaca) {
         faceBack.forEach(element => {
             element.style.opacity = `1`;
         });
         trapaca = false;
     }
-    else{
+    else {
         faceBack.forEach(element => {
             element.style.opacity = `0.15`;
         });
         trapaca = true;
     }
 }
-btnTrapaca.addEventListener('click',ativarTrapaca);
+btnTrapaca.addEventListener('click', ativarTrapaca);
 
 //chamada de funções para iniciar o jogo
 loadGame();
