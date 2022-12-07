@@ -37,7 +37,7 @@
         ?>
 
 
-        <p>Não possui uma conta? <a href="cadastro.html"> <b>Cadastre-se</b></a></p>
+        <p>Não possui uma conta? <a href="cadastro.php"> <b>Cadastre-se</b></a></p>
     </main>
 </body>
 
