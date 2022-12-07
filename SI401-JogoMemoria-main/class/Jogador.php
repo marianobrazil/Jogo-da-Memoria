@@ -95,13 +95,43 @@
 
                 return $this;
         }
-
-        public function cadastrar()
-        {
-            $cx = new Conexao();
-            $cmdSql = "CALL cadastrarJogador('$this->nome','$this->cpf',$this->telefone,$this->email,$this->usuario,$this->senha);";
-            return $cx->insert($cmdSql);
+        private function cx() {
+                return new Conexao();
         }
+
+        public function cadastrar($nome,$cpf,$telefone,$email,$usuario,$senha) {
+                $cmdSql = "CALL cadastrarJogador(?,?,?,?,?,?)";
+                $arrayDados =array($nome,$cpf,$telefone,$email,$usuario,$senha);
+                return $this->cx()->insert($cmdSql,$arrayDados);
+        }
+
+        public function consultarPorUsuario($usuario) {
+            $cmdSql = 'CALL consultarPorUsuario(?)';
+            $result = $this->cx()->consult($cmdSql, array($usuario));
+            if($result){
+                $dadosDoBanco = $result [0];
+                $this->codigo = $dadosDoBanco['codigo'];
+                $this->nome = $dadosDoBanco['nome'];
+                $this->cpf = $dadosDoBanco['cpf'];
+                $this->telefone = $dadosDoBanco['telefone'];
+                $this->email = $dadosDoBanco['email'];
+                $this->usuario = $dadosDoBanco['usuario'];
+                $this->senha = $dadosDoBanco['senha'];
+                return true;
+            }
+            return true;
+        }
+        function mysqlPassword($raw) {
+                return '*'.strtoupper(hash('sha1',pack('H*',hash('sha1', $raw))));
+        }
+
+        public function login($usuario,$senha){
+                if($this->consultarPorUsuario($usuario)){
+                    return $this->mysqlPassword($senha) == $this->senha;
+                }
+                return false;
+        }
+ 
 
 
        /* public function excluir($id)

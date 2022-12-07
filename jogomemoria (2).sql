@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 06-Dez-2022 às 22:46
+-- Tempo de geração: 07-Dez-2022 às 01:10
 -- Versão do servidor: 10.4.25-MariaDB
 -- versão do PHP: 8.1.10
 
@@ -31,7 +31,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `cadastrarPartida` (IN `codigoJogado
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarHistoricoJogador` (IN `codigo` INT)   select * from partida where partida.codigoJogador = codigo$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `loginJogador` (IN `usuario` VARCHAR(50), IN `senha` VARCHAR(50))   select COUNT(jogador.nome) from jogador where jogador.usuario = usuario and PASSWORD(senha) = jogador.senha$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarPorUsuario` (IN `usuario` VARCHAR(50))   select * from jogador where jogador.usuario = usuario$$
 
 DELIMITER ;
 
@@ -50,6 +50,13 @@ CREATE TABLE `jogador` (
   `usuario` varchar(50) DEFAULT NULL,
   `senha` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `jogador`
+--
+
+INSERT INTO `jogador` (`codigo`, `nome`, `cpf`, `telefone`, `email`, `usuario`, `senha`) VALUES
+(10, 'Matheus Roberto Mariano', '46159884867', '15991391598', 'matheusrobertomariano@gmail.com', 'skyrunnerbr', '*91998DA4C36297A82F777A8C5A9D5EB4A90121E7');
 
 -- --------------------------------------------------------
 
@@ -94,7 +101,7 @@ ALTER TABLE `partida`
 -- AUTO_INCREMENT de tabela `jogador`
 --
 ALTER TABLE `jogador`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `partida`

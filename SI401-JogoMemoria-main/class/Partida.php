@@ -95,19 +95,7 @@
                 return $this;
         }
 
-        public function cadastrar()
-        {
-            $cx = new Conexao();
-            $cmdSql = "CALL cadastrarPartida('$this->codigoJogador','$this->modo',$this->dimensao,$this->dataJogo,$this->resultado,$this->tempoJogo);";
-            return $cx->insert($cmdSql);
-        }
-
-        public function consultarHistorico($codigo)
-        {
-            $cx = new Conexao();
-            $cmdSql = "CALL consultarHistoricoJogador($codigo);";
-            return $cx->select($cmdSql);
-        }
+        
 
        /* public function excluir($id)
         {
