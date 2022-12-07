@@ -4,7 +4,7 @@ const timer = document.getElementById('timerP');
 let statusVitoria = false;
 
 const redirect = () => {
-    window.location = '../index.html';
+    window.location = '../index.php';
 }
 
 //definindo o tempo para os jogos dependendo do tamanho do tabuleiro

@@ -4,7 +4,7 @@ const i = parseInt(tabuleiro[0]);
 grid.style.gridTemplateColumns = `repeat(${i}, 1fr)`;
 
 const redirect = () => {
-    window.location = '../index.html';
+    window.location = '../index.php';
 }
 
 //definindo o nome das imgens das cartas, que também serão o id das classes face front
