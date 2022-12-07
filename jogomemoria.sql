@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07-Dez-2022 às 12:29
+-- Tempo de geração: 07-Dez-2022 às 23:45
 -- Versão do servidor: 10.4.25-MariaDB
 -- versão do PHP: 8.1.10
 
@@ -30,9 +30,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `cadastrarJogador` (IN `nome` VARCHA
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `cadastrarPartida` (IN `codigoJogador` INT(11), IN `modo` INT(2), IN `dimensao` VARCHAR(3), IN `datajogo` DATETIME, IN `resultado` INT(1), IN `tempoJogo` TIME)   insert into partida(partida.codigoJogador,partida.modo,partida.dimensao,partida.datajogo,partida.resultado,partida.tempoJogo) VALUES (codigoJogador,modo,dimensao,datajogo,resultado,tempoJogo)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarHistoricoJogador` (IN `codigo` INT)   select * from partida where partida.codigoJogador = codigo$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarHistoricoJogador` (IN `codigo` INT)   select * from partida where partida.codigoJogador = codigo ORDER BY partida.datajogo DESC$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarPorUsuario` (IN `usuario` VARCHAR(20))   select * from jogador where jogador.usuario = usuario$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarPreHistoricoJogador` (IN `codigo` INT)   select * from partida where partida.codigoJogador = codigo ORDER BY partida.datajogo DESC LIMIT 4$$
 
 DELIMITER ;
 
@@ -57,6 +59,9 @@ CREATE TABLE `jogador` (
 -- Extraindo dados da tabela `jogador`
 --
 
+INSERT INTO `jogador` (`codigo`, `nome`, `cpf`, `telefone`, `email`, `usuario`, `dataNasc`, `senha`) VALUES
+(3, 'Matheus Roberto Mariano', '46159884867', '15991391598', 'matheusrobertomariano@gmail.com', 'skyrunnerbr', '2003-06-23', '*91998DA4C36297A82F777A8C5A9D5EB4A90121E7'),
+(10, 'Matheus Roberto Mariano', '12345678909', '15991391598', 'matheusrobertomariano@gmail.com', 'skyrunner_br', '2003-06-23', '*91998DA4C36297A82F777A8C5A9D5EB4A90121E7');
 
 -- --------------------------------------------------------
 
@@ -73,6 +78,26 @@ CREATE TABLE `partida` (
   `resultado` int(1) NOT NULL,
   `tempoJogo` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `partida`
+--
+
+INSERT INTO `partida` (`codigo`, `codigoJogador`, `modo`, `dimensao`, `datajogo`, `resultado`, `tempoJogo`) VALUES
+(20, 3, 0, '2x2', '2022-12-07 18:21:05', 1, '00:00:00'),
+(21, 3, 1, '2x2', '2022-12-07 18:22:30', 1, '00:00:01'),
+(22, 3, 1, '2x2', '2022-12-07 18:22:55', 1, '00:00:03'),
+(23, 3, 0, '4x4', '2022-12-07 18:28:59', 0, '00:00:00'),
+(24, 3, 1, '2x2', '2022-12-07 18:29:27', 1, '00:00:00'),
+(25, 3, 1, '4x4', '2022-12-07 19:04:32', 1, '00:00:08'),
+(26, 3, 1, '2x2', '2022-12-07 19:08:41', 0, '00:00:00'),
+(27, 3, 1, '4x4', '2022-12-07 19:09:37', 1, '00:00:08'),
+(28, 3, 1, '6x6', '2022-12-07 19:14:11', 1, '00:01:06'),
+(29, 3, 0, '2x2', '2022-12-07 19:16:19', 1, '00:00:00'),
+(30, 3, 0, '2x2', '2022-12-07 19:16:29', 0, '00:00:00'),
+(31, 3, 1, '4x4', '2022-12-07 19:16:36', 0, '00:00:00'),
+(32, 3, 0, '4x4', '2022-12-07 19:36:47', 0, '00:00:00'),
+(33, 3, 0, '2x2', '2022-12-07 19:44:58', 1, '00:00:00');
 
 --
 -- Índices para tabelas despejadas
@@ -101,13 +126,13 @@ ALTER TABLE `partida`
 -- AUTO_INCREMENT de tabela `jogador`
 --
 ALTER TABLE `jogador`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- Restrições para despejos de tabelas
