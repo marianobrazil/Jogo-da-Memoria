@@ -1,10 +1,13 @@
 const grid = document.querySelector('.grid');
 const tabuleiro = localStorage.getItem('tabuleiro');
+localStorage.setItem('fimJogo',false);
 const i = parseInt(tabuleiro[0]);
 grid.style.gridTemplateColumns = `repeat(${i}, 1fr)`;
 
 const redirect = () => {
     window.location = '../index.php';
+    localStorage.setItem('statusVitoria',false);
+    localStorage.setItem('fimJogo',true);
 }
 
 //definindo o nome das imgens das cartas, que também serão o id das classes face front
@@ -51,6 +54,9 @@ const checkMatch = (carta1, carta2) => {
             const todasDiv = document.querySelectorAll('.card-match');
             if(todasDiv.length == i*i){
                 alert('Parabéns, você ganhou!');
+                localStorage.setItem('statusVitoria',true);
+                localStorage.setItem('fimJogo',true);
+
             }
         }
         else {

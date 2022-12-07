@@ -1,10 +1,13 @@
 const grid = document.querySelector('.grid');
 const tabuleiro = localStorage.getItem('tabuleiro');
 const timer = document.getElementById('timerP');
+localStorage.setItem('fimJogo',false);
 let statusVitoria = false;
 
 const redirect = () => {
     window.location = '../index.php';
+    localStorage.setItem('statusVitoria',false);
+    localStorage.setItem('fimJogo',true);
 }
 
 //definindo o tempo para os jogos dependendo do tamanho do tabuleiro
@@ -20,9 +23,9 @@ if(i == 2){
 }else{
     minutosIniciais = 3;
 }
-let tempo = minutosIniciais * 60;
+var tempo = minutosIniciais * 60;
 let fimTempo = false;
-
+var tempoAtual;
 
 //função para atualizar o cronômetro
 const atualizarTempo = () => {
@@ -38,8 +41,8 @@ const atualizarTempo = () => {
         }
         if(tempo > 0){
             timer.innerHTML = `${minutes}:${segundos}`;
+            tempoAtual = minutes * 60 + parseInt(segundos);
             tempo--;
-            console.log(tempo)
         }
         else if(fimTempo == false && statusVitoria!=true){
             fimTempo = true;
@@ -47,6 +50,9 @@ const atualizarTempo = () => {
             setTimeout(() => {
                 alert('Você perdeu!');
                 clearInterval(atualizarTempo());
+                localStorage.setItem('statusVitoria',false);
+                localStorage.setItem('fimJogo',true);
+
             }, 200);
             const card = document.querySelectorAll('.card');
             card.forEach(carta => {
@@ -103,6 +109,17 @@ const checkMatch = (carta1, carta2) => {
             if(todasDiv.length == i*i){
                 alert('Parabéns, você ganhou!');
                 statusVitoria = true;
+                localStorage.setItem('statusVitoria',true);
+                let tempoUsado = minutosIniciais * 60 - tempoAtual;
+                tempoUsado = tempoUsado <= 0 ? tempoUsado = 0 : tempoUsado = tempoUsado;
+                let minutes2 = Math.floor(tempoUsado / 60);
+                let segundos2 = Math.ceil(tempoUsado % 60);
+                segundos2 = segundos2 < 10 ? segundos2 = '0' + segundos2 : segundos2 = segundos2;
+                minutes2 = minutes2 < 10 ? minutes2 = '0' + minutes2 : minutes2 = minutes2;
+
+                localStorage.setItem('tempoUsado',`00:${minutes2}:${segundos2}`);
+                localStorage.setItem('fimJogo',true);
+
                 clearInterval(atualizarTempo());
             }
         }
