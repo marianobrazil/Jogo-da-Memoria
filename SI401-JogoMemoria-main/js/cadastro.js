@@ -14,15 +14,13 @@ document.getElementById("btnSubmit").addEventListener("click", function (event) 
     const senha = document.getElementById('senha').value;
     const senha2 = document.getElementById('senha2').value;
     if((nome,dtNasc,cpf,tel,email,usuario,senha,senha2) != ""){
-        event.preventDefault();
         if(senha != senha2){
+            event.preventDefault();
             alert("Senhas não coincidem!");
         }
         else if(!TestaCPF(cpf)){
+            event.preventDefault();
             alert("CPF Inválido!");
-        }
-        else{
-            document.getElementById("formCadastro").submit();
         }
     }
 });

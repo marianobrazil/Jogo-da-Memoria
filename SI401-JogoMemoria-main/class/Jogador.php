@@ -101,9 +101,22 @@
         }
 
         public function cadastrar($nome,$cpf,$telefone,$email,$usuario,$dataNasc,$senha) {
-                $cmdSql = 'CALL cadastrarJogador(?,?,?,?,?,?,?)';
-                $arrayDados = array($nome,$cpf,$telefone,$email,$usuario,$dataNasc,$senha);
-                return $this->cx()->insert($cmdSql,$arrayDados);
+                $cmdSql = 'CALL cadastrarJogador(?,?,?,?,?,?)';
+                $arrayDados = array($nome,$cpf,$telefone,$email,$usuario,$senha);
+                $result = $this->cx()->insert($cmdSql,$arrayDados);
+                if($result){
+                        $dadosDoBanco = $result [0];
+                        $this->codigo = $dadosDoBanco['codigo'];
+                        $this->nome = $dadosDoBanco['nome'];
+                        $this->cpf = $dadosDoBanco['cpf'];
+                        $this->telefone = $dadosDoBanco['telefone'];
+                        $this->email = $dadosDoBanco['email'];
+                        $this->usuario = $dadosDoBanco['usuario'];
+                        $this->dataNasc = $dadosDoBanco['dataNasc'];
+                        $this->senha = $dadosDoBanco['senha'];
+                        return true;
+                }
+                return false;
         }
 
         public function consultarPorUsuario($usuario) {
