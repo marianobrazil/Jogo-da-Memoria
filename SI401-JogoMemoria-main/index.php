@@ -20,7 +20,6 @@
         </div>
        </nav>
        <section>
-
             <div class="sub-nav">
                 <a href="telasClassico/selecaoModoClassico.html">
                     <div class="box1">
@@ -38,7 +37,7 @@
                         </div> 
                     </div>
                 </a>
-                <a href="ranking.html">                    
+                <a href="../SI401-JogoMemoria-main/ranking.php">                    
                     <div class="box3">
                         <img src="src/ranking.png" alt="ranking">
                         <div class="titulo-box">
@@ -60,94 +59,70 @@
                 <div class="titulo">
                     <h1>Histórico de Partidas</h1>
                 </div> 
-                <?php
-                require_once 'class/Jogador.php';
-                $jogador = new Jogador();
-                $preListaPartida = $jogador->consultarPreHistoricoJogador($_SESSION['usuario']);
-                if($preListaPartida){
-                    foreach($preListaPartida as $partida)
-                    {
-                        $data = explode(" ", $partida['datajogo']);
-                        if($partida['resultado'] == '1'){
-                            if($partida['modo'] == '0'){
-                                echo "<div class='win'>
-                                        <div class='player-status'>
-                                            <ul>
-                                                <li>Tempo: sem tempo</li>
-                                                <li>Data: ".$data[0]."</li>
-                                                <li>Hora: ".$data[1]."</li>
-                                            </ul>
-                                        </div>
-                                        <div class='mode-status'>
-                                            <p class='modo'>Clássico</p>
-                                            <p class='dimensao'>".$partida['dimensao']."</p>
-                                        </div>
-                                        <div class='win-status'>
-                                            <p>V</p>
-                                        </div>
-                                    </div>";
-                            }
-                            else{
-                                echo "<div class='win'>
-                                <div class='player-status'>
-                                    <ul>
-                                        <li>Tempo: ".$partida['tempoJogo']."</li>
-                                        <li>Data: ".$data[0]."</li>
-                                        <li>Hora: ".$data[1]."</li>
-                                    </ul>
-                                </div>
-                                <div class='mode-status'>
-                                    <p class='modo'>Tempo</p>
-                                    <p class='dimensao'>".$partida['dimensao']."</p>
-                                </div>
-                                <div class='win-status'>
-                                    <p>V</p>
-                                </div>
-                            </div>";
-                            }
-                        }
-                        else{
-                            if($partida['modo'] == '0'){
-                                echo "<div class='lose'>
-                                        <div class='player-status'>
-                                            <ul>
-                                                <li>Tempo: sem tempo</li>
-                                                <li>Data: ".$data[0]."</li>
-                                                <li>Hora: ".$data[1]."</li>
-                                            </ul>
-                                        </div>
-                                        <div class='mode-status'>
-                                            <p class='modo'>Clássico</p>
-                                            <p class='dimensao'>".$partida['dimensao']."</p>
-                                        </div>
-                                        <div class='lose-status'>
-                                            <p>D</p>
-                                        </div>
-                                    </div>";
-                            }
-                            else{
-                                echo "<div class='lose'>
-                                <div class='player-status'>
-                                    <ul>
-                                        <li>Tempo: ".$partida['tempoJogo']."</li>
-                                        <li>Data: ".$data[0]."</li>
-                                        <li>Hora: ".$data[1]."</li>
-                                    </ul>
-                                </div>
-                                <div class='mode-status'>
-                                    <p class='modo'>Tempo</p>
-                                    <p class='dimensao'>".$partida['dimensao']."</p>
-                                </div>
-                                <div class='lose-status'>
-                                    <p>D</p>
-                                </div>
-                            </div>";
-                            }
-                        }
-                    }
-                }
-            ?>
-                
+                <div class="win">
+                    <div class="player-status">
+                        <ul>
+                            <li>Tempo de Partida</li>
+                            <li>Data</li>
+                            <li>Hora</li>
+                        </ul>
+                    </div>
+                    <div class="mode-status">
+                        <p class="modo">Clássico</p>
+                        <p class="dimensao">3x3</p>
+                    </div>
+                    <div class="win-status">
+                        <p>V</p>
+                    </div>
+                </div>
+                <div class="win">
+                    <div class="player-status">
+                        <ul>
+                            <li>Tempo de Partida</li>
+                            <li>Data</li>
+                            <li>Hora</li>
+                        </ul>
+                    </div>
+                    <div class="mode-status">
+                        <p class="modo">Clássico</p>
+                        <p class="dimensao">3x3</p>
+                    </div>
+                    <div class="win-status">
+                        <p>V</p>
+                    </div>
+                </div>
+                <div class="win">
+                    <div class="player-status">
+                        <ul>
+                            <li>Tempo de Partida</li>
+                            <li>Data</li>
+                            <li>Hora</li>
+                        </ul>
+                    </div>
+                    <div class="mode-status">
+                        <p class="modo">Clássico</p>
+                        <p class="dimensao">3x3</p>
+                    </div>
+                    <div class="win-status">
+                        <p>V</p>
+                    </div>
+                </div>
+                <div class="win">
+                    <div class="player-status">
+                        <ul>
+                            <li>Tempo de Partida</li>
+                            <li>Data</li>
+                            <li>Hora</li>
+                        </ul>
+                    </div>
+                    <div class="mode-status">
+                        <p class="modo">Clássico</p>
+                        <p class="dimensao">3x3</p>
+                    </div>
+                    <div class="win-status">
+                        <p>V</p>
+                    </div>
+                </div>
                 <a href="historico.html"><footer>Ver Histórico Completo</footer></a>
             </div>
        </section>

@@ -47,6 +47,12 @@ table{
     width: 100%;
     height: 58%;
     border-collapse: collapse;
+    background-color: rgba(238, 135, 135, 0.349);
+    color: white;
+}
+table #indice{
+    width: 100%;
+    border-collapse: collapse;
     margin-top: 2%;
     background-color: rgba(238, 135, 135, 0.349);
     color: white;
