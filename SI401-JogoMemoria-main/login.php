@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 <?php
     session_start();
 ?>
+=======
+>>>>>>> 32455437b75f7db75107a9e5275268d4802672da
 <!DOCTYPE html>
 
 <html lang="pt">
@@ -12,6 +15,7 @@
 </head>
 
 <body>
+
 
     <main class="login">
         <img id="biglogo" src="src/brain.png" alt="BigBrain Logo">
@@ -33,6 +37,8 @@
             endif;
             unset($_SESSION['naoautenticado']);
         ?>
+
+
         <p>Não possui uma conta? <a href="cadastro.html"> <b>Cadastre-se</b></a></p>
     </main>
 </body>
