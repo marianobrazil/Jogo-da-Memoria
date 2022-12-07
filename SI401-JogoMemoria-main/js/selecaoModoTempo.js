@@ -11,7 +11,7 @@ const salvarTabuleiro = (event) => {
     localStorage.setItem('dataJogo', date + ' ' + time);
     localStorage.removeItem('tempoUsado');
     localStorage.removeItem('statusVitoria');
-    window.location = 'modoTempo.html';
+    window.location = 'modoTempo.php';
 }
 
 myForm.addEventListener('submit', salvarTabuleiro);

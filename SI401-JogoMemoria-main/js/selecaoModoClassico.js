@@ -12,7 +12,7 @@ const salvarTabuleiro = (event) => {
     localStorage.removeItem('tempoUsado');
     localStorage.removeItem('statusVitoria');
 
-    window.location = 'modoClassico.html';
+    window.location = 'modoClassico.php';
 }
 
 myForm.addEventListener('submit', salvarTabuleiro);

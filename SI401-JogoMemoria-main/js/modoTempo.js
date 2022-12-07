@@ -38,6 +38,7 @@ let xhttp;
 
 function enviarDados() {
     let tabuleiro = localStorage.getItem('tabuleiro');
+    let usuario = document.getElementById('usuario').value;
     let dataJogo = localStorage.getItem('dataJogo');
     let statusVitoria = localStorage.getItem('statusVitoria');
     let tempoUsado = localStorage.getItem('tempoUsado');
@@ -46,10 +47,11 @@ function enviarDados() {
         alert('Não foi possível criar um objeto XMLHttpRequest.');
         return false;
     }
+    
     xhttp.onreadystatechange = mostraResposta;
     xhttp.open('POST', '../backend/cadastroPartida.php', true);
     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhttp.send('tabuleiro=' + encodeURIComponent(tabuleiro)+'&dataJogo=' + encodeURIComponent(dataJogo)+'&statusVitoria=' + encodeURIComponent(statusVitoria)
+    xhttp.send('tabuleiro=' + encodeURIComponent(tabuleiro)+'&usuario='+encodeURIComponent(usuario)+'&dataJogo=' + encodeURIComponent(dataJogo)+'&statusVitoria=' + encodeURIComponent(statusVitoria)
     +'&tempoUsado=' + encodeURIComponent(tempoUsado)+'&modo='+1);
 }
 

@@ -7,7 +7,7 @@
     $usuario = new Jogador();
 
     if($usuario->login($txtUsuario,$senha)){
-        $_SESSION['usuario'] = $usuario;
+        $_SESSION['usuario'] = $usuario->getCodigo();
         header('Location: ../index.php');
     } else {
 
