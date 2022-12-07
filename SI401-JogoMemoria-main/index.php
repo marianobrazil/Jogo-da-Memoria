@@ -16,7 +16,7 @@
             <p id="comp1">Bem-Vindo, Fulano!</p>
             <h1 id="comp2">Jogo da Memória</h1>
             <a href="infospessoais.html" id="comp3">Informações Pessoais</a>
-            <a href="logout.php" id="comp4">Sair</a>
+            <a href="login/logout.php" id="comp4">Sair</a>
         </div>
        </nav>
        <section>
