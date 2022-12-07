@@ -1,82 +1,70 @@
 <?php
-define('HOST', 'localhost');
-define('DBNAME', 'jogomemoria');
-define('USERNAME', 'root');
-define('PASSWORD', '');
-define('PORT', '3306');
-class Conexao {
-    private $lastInsertId=0;
-    private $error='';
+    define('HOST','localhost');
+    define('DBNAME','jogomemoria');
+    define('USERNAME','root');
+    define('PASSWORD','');
+    class Conexao
+    {
+        private $error='';
+        public $lastInsertId;
 
-    public function getLastInsertId() {
-        return $this->lastInsertId;
+        public function getError() {
+            return $this->error;
+        }
+        private function Conectar()
+        {
+            return new PDO('mysql:host=' .HOST. ';dbname=' .DBNAME, USERNAME, PASSWORD);
+        }
+        public function select($cmdSql)
+        {
+            try{
+                $result = $this->Conectar()->prepare($cmdSql);
+                $result->execute();
+                $countRows = $result->rowCount();
+                if($countRows)
+                {
+                    return $result->fetchAll();
+                }
+                return FALSE;
+            }catch(PDOException $error){
+                $this->error = $error;
+            }    
+            
+        }
+        public function delete($cmdSql)
+        {
+            try{
+                return $this->Conectar()->exec($cmdSql);
+            }catch(PDOException $error){
+                $this->error = $error;
+            }  
+        }
+        
+        public function update($cmdSql)
+        {
+            try{
+                return $this->Conectar()->exec($cmdSql);
+            }catch(PDOException $error){
+                $this->error = $error;
+            }  
+        }
+        public function insert($cmdSql)
+        {
+            try{
+                $cx = $this->Conectar();
+                $result = $cx->prepare($cmdSql)->execute();
+                if($result)
+                {
+                    $last_id = $cx->prepare('SELECT LAST_INSERT_ID() as id');
+                    $last_id->execute();
+                    $this->lastInsertId = $last_id->fetchAll()[0]['id'];
+                }
+                return $result;
+            }catch(PDOException $error){
+                $this->error = $error;
+            }  
+        }
+        
     }
-    
-    public function getError() {
-        return $this->error;
-    }
+?>
 
-    private function connect(){
-        try {        
-            $pdo = new PDO('mysql:host='.HOST.';port='.PORT.';dbname='.DBNAME,USERNAME,PASSWORD);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $pdo;
-        }catch(PDOException $error){
-            $this->error = $error;
-        }        
-    }    
-    public function consult($cmdSql,$arrayDados){
-        try{
-            $result = $this->connect()->prepare($cmdSql);
-            $result->execute($arrayDados);
-            $countRows = $result->rowCount();
-            if($countRows){
-                return $result->fetchAll();
-            } 
-        }catch(PDOException $error){
-            $this->error = $error;
-        }                   
-        return FALSE;
-    }
-          
-    public function delete($cmdSql,$arrayDados){
-        try{
-            $result = $this->connect()->prepare($cmdSql);
-            $result->execute($arrayDados);
-            return $result->rowCount(); 
-        }catch(PDOException $error){
-            $this->error = $error;
-        }                   
-        return FALSE;
-    }
-    
-    public function update($cmdSql,$arrayDados){
-        try{
-            $result = $this->connect()->prepare($cmdSql);
-            $result->execute($arrayDados);
-            return $result->rowCount();            
-        }catch(PDOException $error){
-            $this->error = $error;
-        }                   
-        return FALSE;
-    }
-    
-    public function insert($cmdSql,$arrayDados){
-        try{
-            $cx = $this->connect();
-            $result = $cx->prepare($cmdSql);           
-            $result->execute($arrayDados);
-            $countRows = $result->rowCount();
-            if($countRows){
-                $last_id = $cx->prepare('SELECT LAST_INSERT_ID() as id');
-                $last_id->execute();
-                $this->lastInsertId = $last_id->fetchAll()[0]['id'];
-            }
-            return $countRows;
-        }catch(PDOException $error){
-            $this->error = $error;
-            return FALSE;
-        }       
-    }
-    
-}

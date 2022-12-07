@@ -85,6 +85,20 @@
 
                 return $this;
         }
+
+        public function getDataNasc()
+        {
+                return $this->dataNasc;
+        }
+
+        
+        public function setDataNasc($dataNasc)
+        {
+                $this->dataNasc = $dataNasc;
+
+                return $this;
+        }
+
         public function getSenha()
         {
                 return $this->senha;
@@ -96,32 +110,26 @@
 
                 return $this;
         }
-        private function cx() {
-                return new Conexao();
+        
+
+        public function cadastrar()
+        {
+            $cx = new Conexao();
+            $cmdSql = "CALL cadastrarJogador('$this->nome','$this->cpf','$this->telefone','$this->email','$this->usuario','$this->dataNasc','$this->senha');";
+            return $cx->insert($cmdSql);
         }
 
-        public function cadastrar($nome,$cpf,$telefone,$email,$usuario,$dataNasc,$senha) {
-                $cmdSql = 'CALL cadastrarJogador(?,?,?,?,?,?)';
-                $arrayDados = array($nome,$cpf,$telefone,$email,$usuario,$senha);
-                $result = $this->cx()->insert($cmdSql,$arrayDados);
-                if($result){
-                        $dadosDoBanco = $result [0];
-                        $this->codigo = $dadosDoBanco['codigo'];
-                        $this->nome = $dadosDoBanco['nome'];
-                        $this->cpf = $dadosDoBanco['cpf'];
-                        $this->telefone = $dadosDoBanco['telefone'];
-                        $this->email = $dadosDoBanco['email'];
-                        $this->usuario = $dadosDoBanco['usuario'];
-                        $this->dataNasc = $dadosDoBanco['dataNasc'];
-                        $this->senha = $dadosDoBanco['senha'];
-                        return true;
-                }
-                return false;
+        public function consultarTodos()
+        {
+            $cx = new Conexao();
+            $cmdSql = "CALL produto_consultarTodos();";
+            return $cx->select($cmdSql);
         }
-
+        
         public function consultarPorUsuario($usuario) {
-            $cmdSql = 'CALL consultarPorUsuario(?)';
-            $result = $this->cx()->consult($cmdSql, array($usuario));
+            $cx = new Conexao();
+            $cmdSql = "CALL consultarPorUsuario('$usuario')";
+            $result = $cx->select($cmdSql);
             if($result){
                 $dadosDoBanco = $result [0];
                 $this->codigo = $dadosDoBanco['codigo'];
@@ -162,5 +170,8 @@
             $cmdSql = "CALL produto_consultarindiv($id);";
             return $cx->select($cmdSql);
         }*/
+
+       
+
     }
 ?>

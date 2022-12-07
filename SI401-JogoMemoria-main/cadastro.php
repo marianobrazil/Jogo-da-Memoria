@@ -29,26 +29,20 @@
                 if(isset($_POST['btnCadastrar'])){
                     require_once 'class/Jogador.php';
                     $usuario = new Jogador();
-                    $nome = $_POST['nome'];
-                    var_dump($nome);
-                    $cpf = $_POST['cpf'];
-                    var_dump($cpf);
-                    $telefone = $_POST['tel'];
-                    var_dump($telefone);
-                    $email = $_POST['email'];
-                    var_dump($email);
-                    $usuario = $_POST['usuario'];
-                    var_dump($usuario);
-                    $dataNasc = $_POST['dtNasc'];
-                    var_dump($dataNasc);
-                    $senha = $_POST['senha'];
-                    var_dump($senha);
-                    if($usuario->cadastrar($nome,$cpf,$telefone,$email,$usuario)){
+                    $usuario->setNome($_POST['nome']);
+                    $usuario->setCpf($_POST['cpf']);
+                    $usuario->setTelefone($_POST['tel']);
+                    $usuario->setEmail($_POST['email']);
+                    $usuario->setUsuario($_POST['usuario']);
+                    $usuario->setDataNasc($_POST['dtNasc']);
+                    $usuario->setSenha($_POST['senha']);
+
+                   
+                    if($usuario->cadastrar()){
                         echo '<br>Cadastrado com sucesso !!!';
                     } else {
-                        echo 'Erro: Verifique se usuario já está cadastrado.';
+                        echo '<br>Erro: usúario ou CPF já está cadastrado.';
                     }
-                    debug_print_backtrace();
                 }
             ?>
 	    <p>Já possui uma conta? <a href="login.php"> <b>Entre</b></a></p>

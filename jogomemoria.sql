@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07-Dez-2022 às 01:10
+-- Tempo de geração: 07-Dez-2022 às 12:29
 -- Versão do servidor: 10.4.25-MariaDB
 -- versão do PHP: 8.1.10
 
@@ -18,20 +18,21 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `jogomemoria`
+create database jogomemoria;
+use jogomemoria;
 --
 
 DELIMITER $$
 --
 -- Procedimentos
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `cadastrarJogador` (IN `nome` VARCHAR(200), IN `cpf` VARCHAR(11), IN `telefone` VARCHAR(20), IN `email` VARCHAR(50), IN `usuario` VARCHAR(50), IN `senha` VARCHAR(100))   insert into jogador(nome, cpf, telefone, email, usuario, senha) values (nome,cpf,telefone,email,usuario,PASSWORD(senha))$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cadastrarJogador` (IN `nome` VARCHAR(50), IN `cpf` VARCHAR(11), IN `telefone` VARCHAR(20), IN `email` VARCHAR(50), IN `usuario` VARCHAR(20), IN `dataNasc` DATE, IN `senha` VARCHAR(50))   insert into jogador(nome, cpf, telefone, email, usuario, dataNasc, senha) values (nome,cpf,telefone,email,usuario,dataNasc, PASSWORD(senha))$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `cadastrarPartida` (IN `codigoJogador` INT(11), IN `modo` INT(2), IN `dimensao` VARCHAR(3), IN `datajogo` DATETIME, IN `resultado` INT(1), IN `tempoJogo` TIME)   insert into partida(partida.codigoJogador,partida.modo,partida.dimensao,partida.datajogo,partida.resultado,partida.tempoJogo) VALUES (codigoJogador,modo,dimensao,datajogo,resultado,tempoJogo)$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarHistoricoJogador` (IN `codigo` INT)   select * from partida where partida.codigoJogador = codigo$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarPorUsuario` (IN `usuario` VARCHAR(50))   select * from jogador where jogador.usuario = usuario$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarPorUsuario` (IN `usuario` VARCHAR(20))   select * from jogador where jogador.usuario = usuario$$
 
 DELIMITER ;
 
@@ -43,11 +44,12 @@ DELIMITER ;
 
 CREATE TABLE `jogador` (
   `codigo` int(11) NOT NULL,
-  `nome` varchar(200) NOT NULL,
+  `nome` varchar(50) NOT NULL,
   `cpf` varchar(11) NOT NULL,
   `telefone` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `usuario` varchar(50) DEFAULT NULL,
+  `usuario` varchar(20) DEFAULT NULL,
+  `dataNasc` date NOT NULL,
   `senha` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -55,8 +57,6 @@ CREATE TABLE `jogador` (
 -- Extraindo dados da tabela `jogador`
 --
 
-INSERT INTO `jogador` (`codigo`, `nome`, `cpf`, `telefone`, `email`, `usuario`, `senha`) VALUES
-(10, 'Matheus Roberto Mariano', '46159884867', '15991391598', 'matheusrobertomariano@gmail.com', 'skyrunnerbr', '*91998DA4C36297A82F777A8C5A9D5EB4A90121E7');
 
 -- --------------------------------------------------------
 
@@ -101,7 +101,7 @@ ALTER TABLE `partida`
 -- AUTO_INCREMENT de tabela `jogador`
 --
 ALTER TABLE `jogador`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `partida`
