@@ -139,6 +139,18 @@
             return false;
         }
 
+        public function consultarPreHistoricoJogador($usuario) {
+                $cx = new Conexao();
+                $cmdSql = "CALL consultarPreHistoricoJogador('$usuario')";
+                return $result = $cx->select($cmdSql);
+        }
+
+        public function consultarHistoricoJogador($usuario){
+                $cx = new Conexao();
+                $cmdSql = "CALL consultarHistoricoJogador('$usuario')";
+                return $result = $cx->select($cmdSql);
+        }
+
         function mysqlPassword($raw) {
                 return '*'.strtoupper(hash('sha1',pack('H*',hash('sha1', $raw))));
         }
