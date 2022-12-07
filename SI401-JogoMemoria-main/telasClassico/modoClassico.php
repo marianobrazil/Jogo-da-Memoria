@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 
 <html lang="pt">
@@ -32,6 +35,7 @@
                 -->
             </div>
         </section>
+        <?php echo "<input type='hidden' id='usuario' value='".$_SESSION['usuario']."'/>";?>
         <div class="info">
             <div class="trapaca">
                 <h1>Ativar Trapaca</h1>

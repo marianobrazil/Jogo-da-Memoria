@@ -1,6 +1,6 @@
 <?php
     require_once 'Conexao.php';
-    class Jogador
+    class Partida
     {
         private $codigo;
         private $codigoJogador;
@@ -91,11 +91,15 @@
         public function setTempoJogo($tempoJogo)
         {
                 $this->tempoJogo = $tempoJogo;
-
                 return $this;
         }
 
-        
+        public function cadastrar()
+        {
+            $cx = new Conexao();
+            $cmdSql = "CALL cadastrarPartida($this->codigoJogador,$this->modo,'$this->dimensao','$this->datajogo',$this->resultado,'$this->tempoJogo');";
+            return $cx->insert($cmdSql);
+        }
 
        /* public function excluir($id)
         {

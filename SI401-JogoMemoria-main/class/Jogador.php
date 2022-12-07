@@ -119,12 +119,6 @@
             return $cx->insert($cmdSql);
         }
 
-        public function consultarTodos()
-        {
-            $cx = new Conexao();
-            $cmdSql = "CALL produto_consultarTodos();";
-            return $cx->select($cmdSql);
-        }
         
         public function consultarPorUsuario($usuario) {
             $cx = new Conexao();

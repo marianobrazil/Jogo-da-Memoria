@@ -1,13 +1,59 @@
 const grid = document.querySelector('.grid');
 const tabuleiro = localStorage.getItem('tabuleiro');
-localStorage.setItem('fimJogo',false);
 const i = parseInt(tabuleiro[0]);
 grid.style.gridTemplateColumns = `repeat(${i}, 1fr)`;
+var today = new Date();
+var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+var seconds = today.getSeconds() <= 9 ? '0' + today.getSeconds() : today.getSeconds();
+var time = today.getHours() + ':' + today.getMinutes() + ':' + seconds;
+localStorage.setItem('dataJogo', date + ' ' + time);
+localStorage.removeItem('tempoUsado');
+localStorage.removeItem('statusVitoria');
+
+
+let xhttp;
+
+function enviarDados() {
+    let tabuleiro = localStorage.getItem('tabuleiro');
+    let usuario = document.getElementById('usuario').value;
+    let dataJogo = localStorage.getItem('dataJogo');
+    let statusVitoria = localStorage.getItem('statusVitoria');
+    let tempoUsado = null;
+    xhttp = new XMLHttpRequest();
+    if (!xhttp) {
+        alert('Não foi possível criar um objeto XMLHttpRequest.');
+        return false;
+    }
+    
+    xhttp.onreadystatechange = mostraResposta;
+    xhttp.open('POST', '../backend/cadastroPartida.php', true);
+    xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhttp.send('tabuleiro=' + encodeURIComponent(tabuleiro)+'&usuario='+encodeURIComponent(usuario)+'&dataJogo=' + encodeURIComponent(dataJogo)+'&statusVitoria=' + encodeURIComponent(statusVitoria)
+    +'&tempoUsado=' + encodeURIComponent(tempoUsado)+'&modo='+0);
+}
+
+function mostraResposta() {
+    try {
+        if (xhttp.readyState === XMLHttpRequest.DONE) {
+            if (xhttp.status === 200) {
+                let resposta = JSON.parse(xhttp.responseText);
+                alert("Cadastrado no BD");
+            }
+            else {
+                alert('Um problema ocorreu.');
+            }
+        }
+    }
+    catch (e) {
+        alert("Ocorreu uma exceção: " + e.description);
+    }
+}
 
 const redirect = () => {
+    localStorage.setItem('statusVitoria',0);
+    enviarDados();
     window.location = '../index.php';
     localStorage.setItem('statusVitoria',false);
-    localStorage.setItem('fimJogo',true);
 }
 
 //definindo o nome das imgens das cartas, que também serão o id das classes face front
@@ -54,9 +100,8 @@ const checkMatch = (carta1, carta2) => {
             const todasDiv = document.querySelectorAll('.card-match');
             if(todasDiv.length == i*i){
                 alert('Parabéns, você ganhou!');
-                localStorage.setItem('statusVitoria',true);
-                localStorage.setItem('fimJogo',true);
-
+                localStorage.setItem('statusVitoria', 1);
+                enviarDados();
             }
         }
         else {
@@ -131,6 +176,13 @@ const loadGame = () => {
     });
 
     //esconde a parte de trás das cartas para dar um tempo do jogador tentar memorizar e começar o jogo
+
+    const card = document.querySelectorAll('.card');
+    card.forEach(carta => {
+        carta.style.cursor = 'not-allowed';
+        carta.removeEventListener('click', flipCard);
+
+    });
     const faceBack = document.querySelectorAll('.back');
     faceBack.forEach(key => {
         key.style.visibility = `hidden`;
@@ -146,13 +198,17 @@ function sleep(ms) {
 //baseado no tamanho do tabuleiro, faz a parte de trás das cartas voltarem a aparecer e assim começar o jogo de fato
 
 async function demo() {
-    let tempo = 0;
-    for (let j = 0; j < i; j++) {
-        await sleep(650);
-    }
     const faceBack = document.querySelectorAll('.back');
+    const card = document.querySelectorAll('.card');
+    for (let j = 0; j < i; j++) {
+        await sleep(400);
+    }
     faceBack.forEach(element => {
         element.style.visibility = `visible`;
+    });
+    card.forEach(carta => {
+        carta.style.cursor = 'pointer';
+        carta.addEventListener('click', flipCard);
     });
 }
 

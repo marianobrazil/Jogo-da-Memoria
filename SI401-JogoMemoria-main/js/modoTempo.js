@@ -2,6 +2,14 @@ const grid = document.querySelector('.grid');
 const tabuleiro = localStorage.getItem('tabuleiro');
 const timer = document.getElementById('timerP');
 let statusVitoria = false;
+var today = new Date();
+var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+var seconds = today.getSeconds() <= 9 ? '0' + today.getSeconds() : today.getSeconds();
+var time = today.getHours() + ':' + today.getMinutes() + ':' + seconds;
+localStorage.setItem('dataJogo', date + ' ' + time);
+localStorage.removeItem('tempoUsado');
+localStorage.removeItem('statusVitoria');
+
 
 let xhttp;
 
@@ -60,7 +68,7 @@ function mostraResposta() {
         if (xhttp.readyState === XMLHttpRequest.DONE) {
             if (xhttp.status === 200) {
                 let resposta = JSON.parse(xhttp.responseText);
-                alert(resposta.stringModificada);
+                alert("Cadastrado no BD");
             }
             else {
                 alert('Um problema ocorreu.');
@@ -268,6 +276,12 @@ const loadGame = () => {
     });
 
     //esconde a parte de trás das cartas para dar um tempo do jogador tentar memorizar e começar o jogo
+    const card = document.querySelectorAll('.card');
+    card.forEach(carta => {
+        carta.style.cursor = 'not-allowed';
+        carta.removeEventListener('click', flipCard);
+
+    });
     const faceBack = document.querySelectorAll('.back');
     faceBack.forEach(key => {
         key.style.visibility = `hidden`;
@@ -281,14 +295,19 @@ function sleep(ms) {
 
 //baseado no tamanho do tabuleiro, faz a parte de trás das cartas voltarem a aparecer e assim começar o jogo de fato
 async function demo() {
-    for (let j = 0; j < i; j++) {
-        await sleep(650);
-    }
+    setInterval(atualizarTempo, 1000);
     const faceBack = document.querySelectorAll('.back');
+    const card = document.querySelectorAll('.card');
+    for (let j = 0; j < i; j++) {
+        await sleep(400);
+    }
     faceBack.forEach(element => {
         element.style.visibility = `visible`;
     });
-    setInterval(atualizarTempo, 1000);
+    card.forEach(carta => {
+        carta.style.cursor = 'pointer';
+        carta.addEventListener('click', flipCard);
+    });
 }
 
 let trapaca = false;
