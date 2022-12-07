@@ -8,6 +8,7 @@
         private $telefone;
         private $email;
         private $usuario;
+        private $dataNasc;
         private $senha;
 
         public function getCodigo()
@@ -99,9 +100,9 @@
                 return new Conexao();
         }
 
-        public function cadastrar($nome,$cpf,$telefone,$email,$usuario,$senha) {
-                $cmdSql = "CALL cadastrarJogador(?,?,?,?,?,?)";
-                $arrayDados =array($nome,$cpf,$telefone,$email,$usuario,$senha);
+        public function cadastrar($nome,$cpf,$telefone,$email,$usuario,$dataNasc,$senha) {
+                $cmdSql = 'CALL cadastrarJogador(?,?,?,?,?,?,?)';
+                $arrayDados = array($nome,$cpf,$telefone,$email,$usuario,$dataNasc,$senha);
                 return $this->cx()->insert($cmdSql,$arrayDados);
         }
 
@@ -116,11 +117,13 @@
                 $this->telefone = $dadosDoBanco['telefone'];
                 $this->email = $dadosDoBanco['email'];
                 $this->usuario = $dadosDoBanco['usuario'];
+                $this->dataNasc = $dadosDoBanco['dataNasc'];
                 $this->senha = $dadosDoBanco['senha'];
                 return true;
             }
-            return true;
+            return false;
         }
+
         function mysqlPassword($raw) {
                 return '*'.strtoupper(hash('sha1',pack('H*',hash('sha1', $raw))));
         }

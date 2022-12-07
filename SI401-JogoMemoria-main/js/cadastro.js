@@ -3,10 +3,8 @@
 // const cpf = document.getElementsByName('cpf');
 // btnSubmit.addEventListener('click',TestaCPF(cpf));
 
-const btnSubmit = document.getElementById('btnSubmit');
 
-
-btnSubmit.addEventListener('click', function (e) {
+document.getElementById("btnSubmit").addEventListener("click", function (event) {
     const nome = document.getElementById('nome').value;
     const dtNasc = document.getElementById('dtNasc').value;
     const cpf = document.getElementById('cpf').value;
@@ -15,9 +13,8 @@ btnSubmit.addEventListener('click', function (e) {
     const usuario = document.getElementById('usuario').value;
     const senha = document.getElementById('senha').value;
     const senha2 = document.getElementById('senha2').value;
-    let event = e;
     if((nome,dtNasc,cpf,tel,email,usuario,senha,senha2) != ""){
-        e.preventDefault();
+        event.preventDefault();
         if(senha != senha2){
             alert("Senhas não coincidem!");
         }
@@ -25,7 +22,7 @@ btnSubmit.addEventListener('click', function (e) {
             alert("CPF Inválido!");
         }
         else{
-            window.location = '../index.html';
+            document.getElementById("formCadastro").submit();
         }
     }
 });
