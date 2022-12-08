@@ -1,11 +1,13 @@
 <?php
-    $dimensao = (isset($_POST['dimensao'])) ? $_POST['dimensao'] : 'tabuleiro vazio';
-    var_dump($dimensao);
-    require_once '../class/Partida.php';
-    $partida = new Partida();
-    $listPartida = $partida->listarRanking('3x3');
-    if($listPartida){
-        echo json_encode('sucesso');
-    }
-
+$dimensao = (isset($_POST['minhadimensao'])) ? $_POST['minhadimensao'] : 'minhadimensao vazia';
+$computedString = "Olá, " . $dimensao . "!";
+$array = ['userName' => $dimensao, 'stringModificada' => $computedString];
+require_once '../class/Partida.php';
+$partida = new Partida();
+$listaPartida = $partida->listarRanking($dimensao);
+if($listaPartida){
+    echo json_encode($listaPartida);
+}
+else{
+}
 ?>

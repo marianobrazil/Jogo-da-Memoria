@@ -18,7 +18,7 @@
         <div class="menu">
             <p id="comp1">Fulano, você está no modo<br>contra o tempo, dimensão 2x2</p>
             <h1 id="comp2">Jogo da Memória</h1>
-            <a href="../index.html" id="comp3">Página Inicial</a>
+            <a href="../index.php" id="comp3">Página Inicial</a>
             <a href="../infospessoais.html" id="comp4">Informações Pessoais</a>
             <a href="../login/logout.php" id="comp5">Sair</a>
         </div>

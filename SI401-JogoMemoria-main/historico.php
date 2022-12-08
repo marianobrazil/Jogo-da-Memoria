@@ -18,9 +18,9 @@
         <div class="menu">
             <p id="comp1">Bem-Vindo, Fulano!</p>
             <h1 id="comp2">Jogo da Memória</h1>
-            <a href="index.html" id="comp3">Página Inicial</a>
+            <a href="index.php" id="comp3">Página Inicial</a>
             <a href="infospessoais.html" id="comp4">Informações Pessoais</a>
-            <a href="login.html" id="comp5">Sair</a>
+            <a href="login.php" id="comp5">Sair</a>
         </div>
        </nav>
        <section>
@@ -80,7 +80,7 @@
             ?>
             </table>
         </section>
-        <a href="index.html">
+        <a href="index.php">
             <footer id="voltar">
                     <img src="src/voltar.png" alt="btnvoltar">
                     <h4>Voltar</h4>

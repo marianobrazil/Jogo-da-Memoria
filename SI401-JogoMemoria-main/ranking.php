@@ -24,10 +24,10 @@
                 <img src="src/ranking.png" alt="ranking">
             </div>
             <div class="filter">
-                <span id="span2x2">2 x 2</span>
-                <span id="span4x4">4 x 4</span>
-                <span id="span6x6">6 x 6</span>
-                <span id="span8x8">8 x 8</span>
+                <span id="span2x2" onclick="enviarDados('2x2')">2 x 2</span>
+                <span id="span4x4" onclick="enviarDados('4x4')">4 x 4</span>
+                <span id="span6x6" onclick="enviarDados('6x6')">6 x 6</span>
+                <span id="span8x8" onclick="enviarDados('8x8')">8 x 8</span>
             </div>
             <div id="content">
                 <table id="ranking">
@@ -47,10 +47,10 @@
                             {
                                 $contador++;                            
                                 echo "<tr>
-                                        <td class='posicao'>".$contador."</td>
-                                        <td class='nome'>".$partida['nome']."</td>
-                                        <td class='modo'>".$partida['dimensao']."</td>
-                                        <td class='tempo'>".$partida['tempoJogo']."</td> 
+                                        <td class='td posicao'>".$contador."</td>
+                                        <td class='td nome'>".$partida['nome']."</td>
+                                        <td class='td modo'>".$partida['dimensao']."</td>
+                                        <td class='td tempo'>".$partida['tempoJogo']."</td> 
                                      </tr>";
                             }
                         }

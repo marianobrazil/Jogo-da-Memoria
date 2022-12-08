@@ -94,6 +94,12 @@
                 return $this;
         }
 
+        public function listarRanking($parametro){
+                $cx = new Conexao();
+                $cmdSql = "CALL listarRanking('$parametro')";
+                return $result = $cx->select($cmdSql);
+        }
+
         public function cadastrar()
         {
             $cx = new Conexao();
@@ -101,17 +107,12 @@
             return $cx->insert($cmdSql);
         }
         
-        public function listarRanking($dimensao){
-                $cx = new Conexao();
-                $cmdSql = "CALL listarRanking('$dimensao')";
-                return $result = $cx->select($cmdSql);
-        }
-
         public function listarTodasPartidas(){
                 $cx = new Conexao();
                 $cmdSql = "CALL listarTodasPartidas()";
                 return $result = $cx->select($cmdSql);
         }
+
 
        /* public function excluir($id)
         {

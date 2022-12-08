@@ -38,7 +38,7 @@
                         </div> 
                     </div>
                 </a>
-                <a href="ranking.html">                    
+                <a href="ranking.php">                    
                     <div class="box3">
                         <img src="src/ranking.png" alt="ranking">
                         <div class="titulo-box">
@@ -148,7 +148,7 @@
                 }
             ?>
                 
-                <a href="historico.html"><footer>Ver Histórico Completo</footer></a>
+                <a href="historico.php"><footer>Ver Histórico Completo</footer></a>
             </div>
        </section>
     </body>    
