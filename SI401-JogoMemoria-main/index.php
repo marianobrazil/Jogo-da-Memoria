@@ -22,7 +22,7 @@
        <section>
 
             <div class="sub-nav">
-                <a href="telasClassico/selecaoModoClassico.html">
+                <a href="telasClassico/selecaoModoClassico.php">
                     <div class="box1">
                         <img src="src/classico.png" alt="classico">
                         <div class="titulo-box">
@@ -30,7 +30,7 @@
                         </div> 
                     </div>
                 </a>
-                <a href="telasTempo/selecaoModoTempo.html">
+                <a href="telasTempo/selecaoModoTempo.php">
                     <div class="box2">
                         <img src="src/relogio.png" alt="contraOtempo">
                         <div class="titulo-box">

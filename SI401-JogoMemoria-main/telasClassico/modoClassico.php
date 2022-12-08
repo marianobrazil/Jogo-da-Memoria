@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include 'login/verificarLogin.php';
+    include '../login/verificarLogin.php';
 ?>
 <!DOCTYPE html>
 
