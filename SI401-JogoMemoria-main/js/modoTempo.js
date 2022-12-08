@@ -13,37 +13,6 @@ localStorage.removeItem('statusVitoria');
 
 let xhttp;
 
-// function enviarDados() {
-//     let nomeUsuario = localStorage.getItem('tabuleiro');
-//     xhttp = new XMLHttpRequest();
-//     if (!xhttp) {
-//         alert('Não foi possível criar um objeto XMLHttpRequest.');
-//         return false;
-//     }
-//     xhttp.onreadystatechange = mostraResposta;
-//     xhttp.open('POST', '../backend/cadastroPartida.php', true);
-//     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-//     xhttp.send('userName=' + encodeURIComponent(nomeUsuario));
-// }
-
-// function mostraResposta() {
-//     try {
-//         if (xhttp.readyState === XMLHttpRequest.DONE) {
-//             if (xhttp.status === 200) {
-//                 let resposta = JSON.parse(xhttp.responseText);
-//                 alert(resposta.stringModificada + ' - Seu username é: ' +
-//                     resposta.userName);
-//             }
-//             else {
-//                 alert('Um problema ocorreu.');
-//             }
-//         }
-//     }
-//     catch (e) {
-//         alert("Ocorreu uma exceção: " + e.description);
-//     }
-// }
-
 function enviarDados() {
     let tabuleiro = localStorage.getItem('tabuleiro');
     let usuario = document.getElementById('usuario').value;

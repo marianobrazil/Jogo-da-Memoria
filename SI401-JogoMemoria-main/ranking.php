@@ -6,6 +6,7 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" type="text/css" href="css/ranking.css">
+        <script defer src="js/ranking.js"></script>
     </head>
     <body>
        <nav>
@@ -24,43 +25,35 @@
             </div>
             <div class="filter">
                 <span id="span2x2">2 x 2</span>
-                <span id="span3x3">3 x 3</span>
                 <span id="span4x4">4 x 4</span>
-                <span id="span5x5">5 x 5</span>
                 <span id="span6x6">6 x 6</span>
-                <span id="span7x7">7 x 7</span>
                 <span id="span8x8">8 x 8</span>
             </div>
             <div id="content">
-                <table id="indice">
+                <table id="ranking">
                     <tr>
-                        <th id="posicao">Posição</th>
-                        <th id="nome">Nome</th>
-                        <th id="modo">Dimensão</th>
-                        <th id="tempo">Tempo</th>
+                        <th class="posicao">Posição</th>
+                        <th class="nome">Nome</th>
+                        <th class="modo">Dimensão</th>
+                        <th class="tempo">Tempo</th>
                     </tr>
-                </table>
-                <table>
                     <?php 
-                        require_once '../SI401-JogoMemoria-main/class/Conexao.php';
-                        function selecionaTop10($filter)
-                        {
-                            $count = 0;
-                            $cx = new Conexao();
-                            $cmdSql = "SELECT * FROM partida p INNER JOIN jogador j ON j.codigo = p.codigoJogador where tempoJogo IS NOT NULL ORDER BY tempoJogo LIMIT 10";
-                            $result = $cx->select($cmdSql);
-                            if ($result) {
-                                foreach ($result as $valor) {
-                                    $count++;
-                                    echo("<tr> \n <br> \n 
-                                            <td>".$count."</td> \n <br> \n
-                                            <td>".$valor['nome']."</td> \n <br> \n
-                                            <td>".$valor['dimensao']."</td> \n <br> \n
-                                            <td>".$valor['tempoJogo']."</td> \n <br> \n");
-                                }
+                        require_once 'class/Partida.php';
+                        $partida = new Partida();
+                        $listaPartida = $partida->listarTodasPartidas();
+                        $contador = 0;
+                        if($listaPartida){
+                            foreach($listaPartida as $partida)
+                            {
+                                $contador++;                            
+                                echo "<tr>
+                                        <td class='posicao'>".$contador."</td>
+                                        <td class='nome'>".$partida['nome']."</td>
+                                        <td class='modo'>".$partida['dimensao']."</td>
+                                        <td class='tempo'>".$partida['tempoJogo']."</td> 
+                                     </tr>";
                             }
                         }
-                    selecionaTop10(null);
                     ?>
                 </table>
             </div>
