@@ -27,9 +27,8 @@ function mostraResposta() {
                 let resposta = JSON.parse(xhttp.responseText);
                 let tds = document.querySelectorAll('td');
                 tds.forEach(element => {
-                    element.remove()
+                    element.remove();
                 });
-                console.log(resposta);
 
                 let tbody = document.getElementById('ranking');
                 tbody.innerText = '';
