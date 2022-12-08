@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07-Dez-2022 às 23:45
+-- Tempo de geração: 08-Dez-2022 às 03:16
 -- Versão do servidor: 10.4.25-MariaDB
 -- versão do PHP: 8.1.10
 
@@ -35,6 +35,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarHistoricoJogador` (IN `cod
 CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarPorUsuario` (IN `usuario` VARCHAR(20))   select * from jogador where jogador.usuario = usuario$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarPreHistoricoJogador` (IN `codigo` INT)   select * from partida where partida.codigoJogador = codigo ORDER BY partida.datajogo DESC LIMIT 4$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listarRanking` (IN `dimensao` VARCHAR(3))   select partida.dimensao, partida.tempoJogo, jogador.nome from partida inner join jogador on partida.codigoJogador = jogador.codigo where partida.dimensao = dimensao and partida.modo = 1 and partida.resultado = 1 order by partida.tempoJogo asc$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listarTodasPartidas` ()   select partida.dimensao, partida.tempoJogo, jogador.nome as 'nome' from partida inner join jogador on partida.codigoJogador = jogador.codigo where partida.modo = 1 and partida.resultado = 1 order by partida.dimensao desc, partida.tempoJogo asc$$
 
 DELIMITER ;
 
