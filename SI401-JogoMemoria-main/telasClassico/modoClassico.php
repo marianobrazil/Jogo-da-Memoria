@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include 'login/verificarLogin.php';
 ?>
 <!DOCTYPE html>
 
@@ -18,7 +19,7 @@
             <p id="comp1">Fulano, você está jogando no <br>modo clássico, dimensão 2x2</p>
             <h1 id="comp2">Jogo da Memória</h1>
             <a href="../index.php" id="comp3">Página Inicial</a>
-            <a href="../infospessoais.html" id="comp4">Informações Pessoais</a>
+            <a href="../infospessoais.php" id="comp4">Informações Pessoais</a>
             <a href="../login/logout.php" id="comp5">Sair</a>
         </div>
        </nav>

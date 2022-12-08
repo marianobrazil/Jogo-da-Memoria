@@ -15,7 +15,7 @@
         <div class="menu">
             <p id="comp1">Bem-Vindo, Fulano!</p>
             <h1 id="comp2">Jogo da Memória</h1>
-            <a href="infospessoais.html" id="comp3">Informações Pessoais</a>
+            <a href="infospessoais.php" id="comp3">Informações Pessoais</a>
             <a href="login/logout.php" id="comp4">Sair</a>
         </div>
        </nav>
@@ -46,7 +46,7 @@
                         </div> 
                     </div>
                 </a>
-                <a href="tutorial.html">
+                <a href="tutorial.php">
                     <div class="box4">
                         <img src="src/tutorial.png" alt="tutorial">
                         <div class="titulo-box">

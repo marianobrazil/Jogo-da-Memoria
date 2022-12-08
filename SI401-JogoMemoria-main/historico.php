@@ -19,7 +19,7 @@
             <p id="comp1">Bem-Vindo, Fulano!</p>
             <h1 id="comp2">Jogo da Memória</h1>
             <a href="index.php" id="comp3">Página Inicial</a>
-            <a href="infospessoais.html" id="comp4">Informações Pessoais</a>
+            <a href="infospessoais.php" id="comp4">Informações Pessoais</a>
             <a href="login.php" id="comp5">Sair</a>
         </div>
        </nav>

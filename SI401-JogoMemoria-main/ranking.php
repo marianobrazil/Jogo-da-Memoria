@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    include 'login/verificarLogin.php';
+?>
 <!DOCTYPE html>
 
 <html lang="pt">
