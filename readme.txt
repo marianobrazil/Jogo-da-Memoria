@@ -1,0 +1,1 @@
+Essa é uma aplicação completa que gira em torno de um clássico jogo da memória. Para a dinâmica e estilização do jogo (front-end) foi usado HTML, CSS e Javascript, enquanto para a autenticação e permanência de dados de jogadores e partiras (back-end) foi utilizado o PHP e MySQL.
